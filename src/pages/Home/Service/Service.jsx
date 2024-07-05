@@ -19,7 +19,7 @@ const Service = () => {
         <p>
           the majority have suffered alteration in some form, by injected
           humour, or randomised <br /> words which dont look even slightly
-          believable.{" "}
+          believable.
         </p>
       </div>
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 ">

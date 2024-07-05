@@ -2,13 +2,12 @@ import { Link } from "react-router-dom";
 import logo from "../../../assets/logo.svg";
 import { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
-import { signOut } from "firebase/auth";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   const handelLogout = () => {
     logOut()
-      .then(() =>{})
+      .then(() => {})
       .catch((error) => {
         console.error(error);
       });
@@ -26,9 +25,14 @@ const Navbar = () => {
       </li>
 
       {user?.email ? (
-        <li>
-          <button onClick={handelLogout}>Log Out</button>
-        </li>
+        <>
+          <li>
+            <Link to="/bookings">Bookings</Link>
+          </li>
+          <li>
+            <button onClick={handelLogout}>Log Out</button>
+          </li>
+        </>
       ) : (
         <li>
           <Link to="/login">Login</Link>

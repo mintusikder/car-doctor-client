@@ -49,7 +49,7 @@ const BookServices = () => {
     <div>
       <>
         <Banner></Banner>
-        <h2 className="text-center text-3xl">Book Service: {title}</h2>
+        <h2 className="text-center font-bold text-4xl">Book Service: {title}</h2>
 
         <form onSubmit={handelBookOrder}>
           <div className="flex flex-wrap">

@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2'
 import { useLoaderData } from "react-router-dom";
 import Banner from "../Shared/Banner/Banner";
 import { useContext } from "react";
@@ -33,6 +34,14 @@ const BookServices = () => {
     .then(res => res.json())
     .then(data => {
       console.log(data)
+      if(data.insertedId){
+        Swal.fire({
+          title: 'success',
+          text: 'Order Conform Successful',
+          icon: 'success',
+          confirmButtonText: 'Done'
+        })
+      }
     })
     
   };

@@ -5,9 +5,11 @@ import About from "../pages/Home/About/About";
 import Service from "../pages/Home/Service/Service";
 import Login from "../pages/Login/Login";
 import SignUp from "../pages/SignUp/SignUp";
-import CheckOut from "../pages/CheckOut/CheckOut";
+
 
 import BookServices from "../pages/BookServices/BookServices";
+
+import CheckService from "../pages/CheckOutService/CheckService";
 
 const router = createBrowserRouter([
     {
@@ -39,11 +41,12 @@ const router = createBrowserRouter([
             element:<BookServices></BookServices>,
             loader: ({params}) => fetch(`http://localhost:5000/services/${params.id}`)
         },
+      
         {
-            path : "/checkout/:id",
-            element: <CheckOut></CheckOut>,
+            path: "/checkOutService/:id",
+            element: <CheckService></CheckService>,
             loader: ({params}) => fetch(`http://localhost:5000/services/${params.id}`)
-        }
+        },
       ]
     },
   ]);

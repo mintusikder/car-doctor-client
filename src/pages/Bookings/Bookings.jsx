@@ -14,6 +14,23 @@ const Bookings = () => {
         setBookings(data);
       });
   }, []);
+  const handelDelete = (id) => {
+    const proceed = confirm("Are You Suer You Want To Delete");
+    if (proceed) {
+      fetch(`http://localhost:5000/bookings/${id}`, {
+        method: "DELETE",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          if (data.deletedCount > 0) {
+            alert("delete");
+            const remaining = bookings.filter((booking) => booking._id !== id);
+            setBookings(remaining);
+          }
+        });
+    }
+  };
   return (
     <div>
       <h2 className="text-5xl">Your Booking {bookings.length}</h2>
@@ -22,20 +39,20 @@ const Bookings = () => {
           {/* head */}
           <thead>
             <tr>
-              <th>
-                <label>
-                  <input type="checkbox" className="checkbox" />
-                </label>
-              </th>
-              <th>Name</th>
-              <th>Job</th>
-              <th>Favorite Color</th>
               <th></th>
+              <th>IMAGE</th>
+              <th>PRICE</th>
+              <th>DATE</th>
+              <th>DETAILS</th>
             </tr>
           </thead>
           <tbody>
             {bookings.map((booking) => (
-              <BookingRow key={booking._id} booking={booking}></BookingRow>
+              <BookingRow
+                key={booking._id}
+                handelDelete={handelDelete}
+                booking={booking}
+              ></BookingRow>
             ))}
           </tbody>
         </table>

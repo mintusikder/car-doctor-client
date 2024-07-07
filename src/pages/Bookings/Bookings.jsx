@@ -13,7 +13,7 @@ const Bookings = () => {
       .then((data) => {
         setBookings(data);
       });
-  }, []);
+  }, [url]);
   const handelDelete = (id) => {
     const proceed = confirm("Are You Suer You Want To Delete");
     if (proceed) {
@@ -30,6 +30,27 @@ const Bookings = () => {
           }
         });
     }
+  };
+  const handelBookingConfirm = (id) => {
+    fetch(`http://localhost:5000/bookings/${id}`, {
+      method: "PATCH",
+      headers: {
+        "content-type": "application.json",
+      },
+      body: JSON.stringify({ status: "confirm" }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.modifiedCount > 0) {
+          //updateData
+          const remaining = bookings.filter((booking) => booking._id !== id);
+          const updated = bookings.find((booking) => booking._id === id);
+          updated.status = "confirm";
+          const newBookings = [updated, ...remaining];
+          setBookings(newBookings);
+        }
+      });
   };
   return (
     <div>
@@ -52,6 +73,7 @@ const Bookings = () => {
                 key={booking._id}
                 handelDelete={handelDelete}
                 booking={booking}
+                handelBookingConfirm={handelBookingConfirm}
               ></BookingRow>
             ))}
           </tbody>
